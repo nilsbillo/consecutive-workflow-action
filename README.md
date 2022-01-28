@@ -23,7 +23,9 @@ jobs:
     # ...
 ```
 
-### Security Note:
+### Security Notes:
+
+#### Access Token
 
 The token is needed to avoid rate limitation issues when performing API calls. I was thinking about making that optional but decided to just make you aware of the security risk and how to avoid it.
 
@@ -36,6 +38,10 @@ There is a `v1` branch and tag for this action and you can simply decide to trus
 ```
 
 Review [the repo at this commit](https://github.com/mktcode/consecutive-workflow-action/tree/cb3605cc3ab767c170434b0cfb6b522d193b7d57).
+
+#### Workflow Permissions
+
+It's always a good idea to [limit permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) to the required minimum. To read information about previous runs, the workflow needs at least the `actions: read` permission.
 
 # Alternatives
 
