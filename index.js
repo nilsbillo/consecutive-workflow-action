@@ -9,6 +9,8 @@ async function run() {
   try {
     const token = core.getInput('token')
     const interval = core.getInput('interval')
+    const branch = core.getInput('branch')
+
     const octokit = github.getOctokit(token)
 
     const owner = github.context.payload.repository.owner.login
@@ -22,8 +24,8 @@ async function run() {
     })
 
     // fetch the lastest workflow runs queued and in_progress
-    const { data: { workflow_runs: queued } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'queued', workflow_id: currentRun.workflow_id })
-    const { data: { workflow_runs: inProgress } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id })
+    const { data: { workflow_runs: queued } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'queued', workflow_id: currentRun.workflow_id, branch })
+    const { data: { workflow_runs: inProgress } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id, branch })
     const runs = [ ...queued, ...inProgress ]
 
     // to take into account that runs can be deleted: sort runs by number and pick the runs with a number smaller than the current one
