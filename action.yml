@@ -11,6 +11,9 @@ inputs:
     description: The interval in which to check for a status update
     required: false
     default: 10
+  branch:
+    description: The optional branch name to wait for the status update
+    required: false
 runs:
   using: node12
   main: dist/index.js
