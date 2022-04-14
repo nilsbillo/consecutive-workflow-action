@@ -31,8 +31,8 @@ async function run() {
     let apa2 = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'queued', workflow_id: currentRun.workflow_id })
     let apa3 = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id })
 
-    core.info(`1queued  active workflow runs (${apa2})`)
-    core.info(`1progress  active workflow runs (${apa3})`)
+    core.info(`1queued  active workflow runs (${JSON.stringify(apa2)})`)
+    core.info(`1progress  active workflow runs (${JSON.stringify(apa3)})`)
     core.info(`queued  active workflow runs (${queued})`)
     core.info(`progress  active workflow runs (${inProgress})`)
     core.info(`inProgress  active workflow runs (${JSON.stringify(inProgress.map(obj => obj.id))})`)
