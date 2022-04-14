@@ -28,14 +28,14 @@ async function run() {
     const { data: { workflow_runs: inProgress } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id, branch })
     const runs = [ ...queued, ...inProgress ]
 
-    var workflowRunsq = octokit.actions.listWorkflowRuns({
+    var workflowRunsq = octokit.rest.actions.listWorkflowRuns({
                 owner: owner,
                 repo: repo,
                 workflow_id: currentRun.workflow_id,
                 status: 'queued'
     })
 
-    var workflowRunsi = octokit.actions.listWorkflowRuns({
+    var workflowRunsi = octokit.rest.actions.listWorkflowRuns({
                 owner: owner,
                 repo: repo,
                 workflow_id: currentRun.workflow_id,
