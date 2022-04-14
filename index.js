@@ -28,6 +28,8 @@ async function run() {
     const { data: { workflow_runs: inProgress } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id, branch })
     const runs = [ ...queued, ...inProgress ]
 
+    core.info(`queued  active workflow runs (${JSON.stringify(queued.map(obj => obj.id))})`)
+    core.info(`inProgress  active workflow runs (${JSON.stringify(inProgress.map(obj => obj.id))})`)
     // to take into account that runs can be deleted: sort runs by number and pick the runs with a number smaller than the current one
     let lastRuns = runs.sort((a, b) => b.run_number - a.run_number).filter(run => run.run_number < currentRun.run_number)
 
