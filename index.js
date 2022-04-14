@@ -28,6 +28,9 @@ async function run() {
     const { data: { workflow_runs: inProgress } } = await octokit.rest.actions.listWorkflowRuns({ owner, repo, status: 'in_progress', workflow_id: currentRun.workflow_id, branch })
     const runs = [ ...queued, ...inProgress ]
 
+    core.info(`queued  active workflow runs (${queued})`)
+    core.info(`queued  active workflow runs (${inProgress})`)
+    core.info(`inProgress  active workflow runs (${JSON.stringify(inProgress.map(obj => obj.id))})`)
     core.info(`workflowd id (${currentRun.workflow_id})`)
     core.info(`branch id (${branch})`)
     core.info(`owner id (${owner})`)
